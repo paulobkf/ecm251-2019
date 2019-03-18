@@ -1,0 +1,12 @@
+package Olamundoeclipse;
+
+public class MinhaClasseJava {
+
+	public static void main(String[] args) {
+		System.out.println("Olá Mundo");
+		int Idade = 24;
+		String nome = "Zoio de Gato";
+
+	}
+
+}
