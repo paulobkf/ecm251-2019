@@ -18,10 +18,11 @@ var PhaserGame;
 (function (PhaserGame) {
     var FirstScene = /** @class */ (function (_super) {
         __extends(FirstScene, _super);
-        // Construtor da classe
         function FirstScene() {
             // Inicializar pelo menos o nome da cena
-            return _super.call(this, { key: 'FirstScene' }) || this;
+            return _super.call(this, {
+                key: 'FirstScene'
+            }) || this;
         }
         // Método utilizado para inicializar a cena antes de ela aparecer
         FirstScene.prototype.preload = function () {
@@ -29,6 +30,7 @@ var PhaserGame;
             this.load.image('Parede_Horizontal', './assets/paredeH.png');
             this.load.image('Chao_Inclinado', './assets/chao_inclinado.png');
             this.load.image('Chao_2', './assets/chao_2.png');
+            this.load.image('Hero', './assets/ghost.png');
         };
         // Método utilizado para executar o jogo com suas definições iniciais
         FirstScene.prototype.create = function () {
@@ -40,10 +42,34 @@ var PhaserGame;
             this.platforms.create(10, 300, 'Parede_Horizontal');
             this.platforms.create(790, 300, 'Parede_Horizontal');
             this.platforms.create(507, 540, 'Chao_Inclinado');
-            this.platforms.create(290, 420, 'Chao_2');
+            this.platforms.create(290, 400, 'Chao_2');
+            this.platforms.create(507, 260, 'Chao_Inclinado');
+            this.platforms.create(290, 120, 'Chao_2');
+            this.hero = this.physics.add.sprite(40, 565, 'Hero');
+            this.physics.add.collider(this.hero, this.platforms);
+            this.keyUp = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+            this.keyDown = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+            this.keyLeft = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+            this.keyRight = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         };
         // Método utilizado para atualizar cada quadro do jogo
         FirstScene.prototype.update = function () {
+            if (this.hero) {
+                if (this.keyUp && this.keyUp.isDown && this.hero.body.touching.down) {
+                    console.log('UP is pressed');
+                    this.hero.body.velocity.y = -320;
+                }
+                if (this.keyLeft && this.keyLeft.isDown) {
+                    this.hero.body.velocity.x = -200;
+                }
+                else if (this.keyRight && this.keyRight.isDown) {
+                    console.log('RIGHT is pressed');
+                    this.hero.body.velocity.x = 200;
+                }
+                else {
+                    this.hero.body.velocity.x = 0;
+                }
+            }
         };
         return FirstScene;
     }(Phaser.Scene));
