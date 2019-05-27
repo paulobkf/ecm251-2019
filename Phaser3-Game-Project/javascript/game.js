@@ -27,6 +27,8 @@ var PhaserGame;
         FirstScene.prototype.preload = function () {
             this.load.image('Parede_Vertical', './assets/paredeV.png');
             this.load.image('Parede_Horizontal', './assets/paredeH.png');
+            this.load.image('Chao_Inclinado', './assets/chao_inclinado.png');
+            this.load.image('Chao_2', './assets/chao_2.png');
         };
         // Método utilizado para executar o jogo com suas definições iniciais
         FirstScene.prototype.create = function () {
@@ -37,6 +39,8 @@ var PhaserGame;
             this.platforms.create(530, 590, 'Parede_Vertical');
             this.platforms.create(10, 300, 'Parede_Horizontal');
             this.platforms.create(790, 300, 'Parede_Horizontal');
+            this.platforms.create(507, 540, 'Chao_Inclinado');
+            this.platforms.create(290, 420, 'Chao_2');
         };
         // Método utilizado para atualizar cada quadro do jogo
         FirstScene.prototype.update = function () {
